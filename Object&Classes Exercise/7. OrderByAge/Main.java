@@ -30,7 +30,11 @@ public class Main {
             }
         }
 
+<<<<<<< HEAD
         peoples.sort((p2, p1) -> p2.getAge() + p1.getAge());
+=======
+        Collections.sort(peoples, (p1, p2) -> p1.getAge() - p2.getAge());
+>>>>>>> af325a71b84c845f8db8a7a4d1bdd4b8545c071b
 
         for (Persons it:peoples) {
             System.out.println(it.toString());
