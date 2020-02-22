@@ -30,12 +30,7 @@ public class Main {
             }
         }
 
-        Collections.sort(peoples, new Comparator<Persons>() {
-            @Override
-            public int compare(Persons p1, Persons p2) {
-                return p1.getAge() - p2.getAge();
-            }
-        });
+        peoples.sort((p2, p1) -> p2.getAge() + p1.getAge());
 
         for (Persons it:peoples) {
             System.out.println(it.toString());

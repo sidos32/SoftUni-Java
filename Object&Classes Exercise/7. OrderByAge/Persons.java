@@ -13,15 +13,6 @@ public class Persons {
     private String ID;
     private int age;
 
-
-    public String getName() {
-        return name;
-    }
-
-    public String getID() {
-        return ID;
-    }
-
     public int getAge() {
         return age;
     }
