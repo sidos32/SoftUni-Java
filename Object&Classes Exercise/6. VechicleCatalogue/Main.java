@@ -1,79 +1,71 @@
 package SoftUni.VehicleCatalogue;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
-        boolean stopFilingCatalog = false;
+        Scanner scanner = new Scanner(System.in);
 
 
-        while (!stopFilingCatalog) {
-            String[] tokens = sc.nextLine().split(" ");
-            String model;
-            String color;
-            int horsePower;
+        String input = scanner.nextLine();
 
-            if (tokens[0].equals("truck")) {
-                model = tokens[1];
-                color = tokens[2];
-                horsePower = Integer.parseInt(tokens[3]);
+        List<Vehicle> vehicles = new ArrayList<>();
+        while (!"End".equals(input)) {
 
-                Vehicle vehicle = new Vehicle("Truck", model, color, horsePower);
-                vehicles.add(vehicle);
+            String[] command = input.split("\\s+");
 
-            } else if (tokens[0].equals("car")) {
-                model = tokens[1];
-                color = tokens[2];
-                horsePower = Integer.parseInt(tokens[3]);
+            String type = command[0];
+            String model = command[1];
+            String color = command[2];
+            int horsePower = Integer.parseInt(command[3]);
 
-                Vehicle vehicle = new Vehicle("Car", model, color, horsePower);
-                vehicles.add(vehicle);
-            }
+            Vehicle vehicle = new Vehicle();
 
-            if (tokens[0].equals("End")) {
-                stopFilingCatalog = true;
-            }
+            vehicle.setType(type);
+            vehicle.setModel(model);
+            vehicle.setColor(color);
+            vehicle.setHorsePower(horsePower);
+
+            vehicles.add(vehicle);
+
+            input = scanner.nextLine();
 
         }
 
-        boolean closeTheCatalog = false;
-
-
-        double carsTotalHorsePower = 0;
-        double truckTotalHorsePower = 0;
-
-        int carsCounter = 0;
-        int truckCounter = 0;
-
-            while (!closeTheCatalog){
-                String command = sc.nextLine();
-
-                    for (Vehicle it: vehicles) {
-
-                        if(it.getType().equals("Truck")){
-                            truckTotalHorsePower += it.getHorsePower();
-                            truckCounter++;
-                        }else {
-                            carsTotalHorsePower += it.getHorsePower();
-                            carsCounter++;
-                        }
-                        if(command.equals(it.getModel())){
-                            System.out.println( it.toString());
-                        }
-                    }
-
-                if(command.equals("Close the Catalogue")){
-                    closeTheCatalog = true;
-                }
-            }
-
-        System.out.printf("Cars have average horsepower of: %.2f.\n",carsTotalHorsePower / carsCounter);
-        System.out.printf("Trucks have average horsepower of: %.2f.",truckTotalHorsePower / truckCounter);
+        String model = "";
+        while (!"Close the Catalogue".equals(model = scanner.nextLine())) {
+            String finalModel = model;
+            vehicles
+                    .stream()
+                    .filter(v -> v.getModel().equals(finalModel))
+                    .forEach(System.out::println);
 
         }
+        System.out.println(String.format("Cars have average horsepower of: %.2f.", average(vehicles.stream()
+                .filter(v -> v.getType().equals("car"))
+                .collect(Collectors.toList()))));
+
+        System.out.println(String.format("Trucks have average horsepower of: %.2f.", average(vehicles.stream()
+                .filter(v -> v.getType().equals("truck"))
+                .collect(Collectors.toList()))));
+
+        
+        
     }
+    private static double average(List<Vehicle> vehicles) {
+        if (vehicles.size() == 0) {
+            return 0.0;
+        }
+        double sum = 0;
+
+        for (Vehicle vehicle : vehicles) {
+            sum += vehicle.getHorsePower();
+        }
+        return sum / vehicles.size();
+    }
+}
+
 

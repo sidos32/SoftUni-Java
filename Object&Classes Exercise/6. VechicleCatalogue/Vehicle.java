@@ -1,43 +1,49 @@
 package SoftUni.VehicleCatalogue;
 
-
 public class Vehicle {
-
     private String type;
-
     private String model;
     private String color;
     private int horsePower;
 
-    public Vehicle(String type, String model, String color, int horsePower) {
-        this.type = type;
-        this.model = model;
-        this.color = color;
-        this.horsePower = horsePower;
-    }
-
-
-    public String getModel() {
-
-        return model;
-    }
-
     public String getType() {
-
         return type;
     }
 
-    public double getHorsePower() {
+    public void setType(String type) {
+        this.type = type;
+    }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getHorsePower() {
         return horsePower;
     }
 
+    public void setHorsePower(int horsePower) {
+        this.horsePower = horsePower;
+    }
 
     @Override
     public String toString() {
-        return String
-                .format("Type: %s\n" + "Model: %s\n" + "Color: %s\n" + "Horsepower: %d"
-                        ,type,model,color,horsePower);
+        return String.format("Type: %s\n" +
+                "Model: %s\n" +
+                "Color: %s\n" +
+                "Horsepower: %d", getType().toUpperCase().charAt(0)
+                + this.getType().substring(1), getModel(), getColor(), getHorsePower());
     }
-
 }
