@@ -20,7 +20,7 @@ public class Main {
             }
 
             if (i % 5 == 0) {
-                totalPlunder -= 0.3D * totalPlunder;
+                totalPlunder -= 0.30 * totalPlunder;
             }
         }
 
