@@ -11,7 +11,7 @@ public class Race {
 
         String[] data = scanner.nextLine().split(",\\s+");
         ArrayList<String> racers = new ArrayList<>(Arrays.asList(data));
-        HashMap<String, Integer> result = new LinkedHashMap<>();
+        LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
 
         Pattern namePattern = Pattern.compile("[A-Za-z]");
         Pattern kmPattern = Pattern.compile("[0-9]");
