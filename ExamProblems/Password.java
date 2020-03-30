@@ -10,7 +10,7 @@ public class Password {
 
         int numOfPasswords = Integer.parseInt(scanner.nextLine());
 
-        final String validPasswordRegex = "(.+)>(?<numbers>[\\d]+)\\|(?<lowerCaseW>[a-z]+)" +
+        final String validPasswordRegex = "(.+)>(?<numbers>[0-9]+)\\|(?<lowerCaseW>[a-z]+)" +
                 "\\|(?<upperCaseW>[A-Z]+)\\|(?<symbols>[^<>]+)<\\1$";
         Pattern pattern = Pattern.compile(validPasswordRegex);
 
@@ -20,18 +20,16 @@ public class Password {
             Matcher matcher = pattern.matcher(password);
 
             if (matcher.find()) {
-                int numbers = Integer.parseInt(matcher.group("numbers"));
+                String numbers = matcher.group("numbers");
                 String lowerCaseWord = matcher.group("lowerCaseW");
                 String upperCaseWord = matcher.group("upperCaseW");
                 String symbols = matcher.group("symbols");
 
-                System.out.printf("Password: %d%s%s%s%n", numbers, lowerCaseWord, upperCaseWord, symbols);
+                System.out.printf("Password: %s%s%s%s%n", numbers, lowerCaseWord, upperCaseWord, symbols);
 
             } else {
                 System.out.println("Try another password!");
             }
-
         }
-
     }
 }
