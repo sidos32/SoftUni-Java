@@ -22,7 +22,7 @@ public class SimpleCalculator {
             if (op.equals("+")) {
                 stack.push(String.valueOf(firstNum + secondNum));
             } else {
-                stack.push(String.valueOf(firstNum + secondNum));
+                stack.push(String.valueOf(firstNum - secondNum));
             }
 
         }
